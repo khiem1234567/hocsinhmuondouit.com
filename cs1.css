@@ -541,3 +541,24 @@ body {
     
     
 }
+.marquee-container {
+    width: 100vw; /* Chiếm toàn bộ chiều rộng màn hình */
+    color: #07faee;
+    overflow: hidden;
+  }
+  
+  .marquee {
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
