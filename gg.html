@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Clock</title>
+    <title>Thả Tim ❤️</title>
     <style>
         body {
             display: flex;
@@ -15,7 +15,7 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            overflow-y: auto;
+            overflow: hidden;
             background: linear-gradient(45deg, rgb(255, 105, 180), rgb(255, 182, 193), rgb(255, 20, 147), rgb(255, 0, 255), rgb(255, 140, 0), rgb(255, 99, 71));
             background-size: 600% 600%;
             animation: bgAnimation 15s infinite alternate;
@@ -23,33 +23,29 @@
 
         @keyframes bgAnimation {
             0% { background-position: 0% 50%; }
-            25% { background-position: 25% 75%; }
-            50% { background-position: 50% 50%; }
-            75% { background-position: 75% 25%; }
-            100% { background-position: 100% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .clock {
             font-size: 2em;
             font-weight: bold;
-            white-space: nowrap;
             color: white;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-            font-family: 'Courier New', Courier, monospace;
             background: rgba(0, 0, 0, 0.6);
             padding: 15px 30px;
             border-radius: 10px;
+            margin-bottom: 20px;
             animation: glow 3s infinite alternate;
         }
 
+        /* Hiệu ứng lấp lánh đồng hồ */
         @keyframes glow {
-            0% { text-shadow: 2px 2px 10px rgba(255, 20, 147, 0.8); }
-            50% { text-shadow: 2px 2px 20px rgba(255, 182, 193, 0.8); }
-            100% { text-shadow: 2px 2px 10px rgba(255, 0, 255, 0.8); }
+            0% { text-shadow: 0 0 10px rgba(255, 20, 147, 0.8); }
+            50% { text-shadow: 0 0 20px rgba(255, 182, 193, 0.8); }
+            100% { text-shadow: 0 0 10px rgba(255, 0, 255, 0.8); }
         }
 
         .heart-button {
-            margin-top: 20px;
             padding: 10px 20px;
             font-size: 1.2em;
             color: white;
@@ -57,15 +53,11 @@
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
+            transition: 0.3s;
         }
 
         .heart-button:hover {
             background: #e63939;
-        }
-
-        .heart-button:active {
-            transform: scale(1.1);
         }
 
         .heart-counter {
@@ -74,7 +66,33 @@
             color: white;
             font-weight: bold;
         }
+
+        /* Hiệu ứng trái tim bay lên */
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: red;
+            opacity: 1;
+            animation: flyUp 3s linear forwards;
+        }
+
+        @keyframes flyUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
     </style>
+</head>
+<body>
+    <div class="clock" id="clock"></div>
+    <button class="heart-button" onclick="addHeart()">❤️ Thả Tim</button>
+    <div class="heart-counter" id="heart-counter">Bạn đã thả 0 tim cho Khiêm</div>
+
     <script>
         function updateClock() {
             const now = new Date();
@@ -89,7 +107,7 @@
 
         function updateHearts() {
             const hearts = localStorage.getItem("heartCount") || 0;
-            document.getElementById("heart-counter").textContent = `❤️ ${hearts} người đã thả tim!`;
+            document.getElementById("heart-counter").textContent = `Bạn đã thả ${hearts} tim cho Khiêm`;
         }
 
         function addHeart() {
@@ -97,6 +115,24 @@
             hearts = parseInt(hearts) + 1;
             localStorage.setItem("heartCount", hearts);
             updateHearts();
+
+            // Tạo hiệu ứng tim bay lên từ vị trí ngẫu nhiên
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+
+            // Chọn vị trí ngẫu nhiên trong màn hình
+            const xPos = Math.random() * window.innerWidth;
+            const yPos = Math.random() * (window.innerHeight - 50) + 50; // Không quá sát viền trên
+
+            heart.style.left = `${xPos}px`;
+            heart.style.top = `${yPos}px`;
+            document.body.appendChild(heart);
+
+            // Xóa tim sau khi bay lên
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
         }
 
         window.onload = function() {
@@ -105,11 +141,5 @@
             updateHearts();
         };
     </script>
-</head>
-<body>
-    <h1>Welcome to My Page</h1>
-    <div class="clock" id="clock"></div>
-    <button class="heart-button" onclick="addHeart()">❤️ Thả Tim</button>
-    <div class="heart-counter" id="heart-counter"></div>
 </body>
 </html>
