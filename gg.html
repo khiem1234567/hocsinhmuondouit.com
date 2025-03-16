@@ -15,7 +15,7 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            overflow-y: auto; /* Fix lỗi cuộn trên điện thoại */
             background: linear-gradient(45deg, rgb(255, 105, 180), rgb(255, 182, 193), rgb(255, 20, 147), rgb(255, 0, 255), rgb(255, 140, 0), rgb(255, 99, 71));
             background-size: 600% 600%;
             animation: bgAnimation 15s infinite alternate;
@@ -28,13 +28,13 @@
         }
 
         .clock {
-            font-size: 2em;
+            font-size: 1.5em; /* Giảm kích thước đồng hồ */
             font-weight: bold;
             color: white;
             background: rgba(0, 0, 0, 0.6);
-            padding: 15px 30px;
+            padding: 10px 20px;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             animation: glow 3s infinite alternate;
         }
 
@@ -46,14 +46,15 @@
         }
 
         .heart-button {
-            padding: 10px 20px;
-            font-size: 1.2em;
+            padding: 8px 15px; /* Giảm kích thước nút */
+            font-size: 1em; /* Giảm cỡ chữ */
             color: white;
             background: #ff4d4d;
             border: none;
             border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
+            margin-top: 10px;
         }
 
         .heart-button:hover {
@@ -61,8 +62,8 @@
         }
 
         .heart-counter {
-            margin-top: 10px;
-            font-size: 1.2em;
+            margin-top: 8px;
+            font-size: 1em; /* Giảm cỡ chữ số tim */
             color: white;
             font-weight: bold;
         }
@@ -70,7 +71,7 @@
         /* Hiệu ứng trái tim bay lên */
         .heart {
             position: absolute;
-            font-size: 2em;
+            font-size: 1.5em; /* Giảm kích thước tim bay */
             color: red;
             opacity: 1;
             animation: flyUp 3s linear forwards;
