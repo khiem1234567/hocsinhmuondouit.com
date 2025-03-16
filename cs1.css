@@ -65,7 +65,7 @@ body {
     grid-column: 3 / 10;
     grid-row: 1;
     border-top-left-radius: 80px;
-    background: #02f7ff;
+    background: #07e47d;
   }
   
   .lid-front .purple-left {
@@ -543,7 +543,7 @@ body {
 }
 .marquee-container {
     width: 100vw; /* Chiếm toàn bộ chiều rộng màn hình */
-    color: #07faee;
+    color: #0aa2fa;
     overflow: hidden;
   }
   

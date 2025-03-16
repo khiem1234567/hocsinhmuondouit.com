@@ -8,22 +8,141 @@
     <link rel="stylesheet" href="cs1.css">
     <link rel="stylesheet" href="cs2.css">
     <link rel="shortcut icon" type="x-icon" href="heart.png">
-    <header>
-        <h1>Chúc mừng năm mới!</h1>
-      </header>
-      <style>
-        p {
-            color: rgb(253, 186, 0); /* Thay đổi màu chữ thành màu xanh dương */
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow-y: auto;
+            background: linear-gradient(45deg, rgb(255, 105, 180), rgb(255, 182, 193), rgb(255, 20, 147), rgb(255, 0, 255), rgb(255, 140, 0), rgb(255, 99, 71));
+            background-size: 600% 600%;
+            animation: bgAnimation 15s infinite alternate;
         }
-      </style>
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 25% 75%; }
+            50% { background-position: 50% 50%; }
+            75% { background-position: 75% 25%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .clock {
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 30px;
+            border-radius: 10px;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 2px 2px 10px rgba(255, 20, 147, 0.8); }
+            50% { text-shadow: 2px 2px 20px rgba(255, 182, 193, 0.8); }
+            100% { text-shadow: 2px 2px 10px rgba(255, 0, 255, 0.8); }
+        }
+
+        .heart-button, .reset-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background: #ff4d4d;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .heart-button:hover, .reset-button:hover {
+            background: #e63939;
+        }
+
+        .heart-button:active, .reset-button:active {
+            transform: scale(1.1);
+        }
+
+        .heart-counter {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: white;
+            font-weight: bold;
+        }
+
+        .reset-button {
+            background: #555;
+            margin-top: 10px;
+        }
+
+        .reset-button:hover {
+            background: #333;
+        }
+
+    </style>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const year = now.getFullYear();
+            document.getElementById('clock').textContent = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+        }
+
+        function updateHearts() {
+            const hearts = localStorage.getItem("heartCount") || 0;
+            document.getElementById("heart-counter").textContent = `❤️ ${hearts} người đã thả tim!`;
+        }
+
+        function addHeart() {
+            let hearts = localStorage.getItem("heartCount") || 0;
+            hearts = parseInt(hearts) + 1;
+            localStorage.setItem("heartCount", hearts);
+            updateHearts();
+        }
+
+        function resetHearts() {
+            const confirmReset = confirm("Bạn có chắc chắn muốn đặt lại số tim về 0 không?");
+            if (confirmReset) {
+                localStorage.setItem("heartCount", 0);
+                updateHearts();
+            }
+        }
+
+        window.onload = function() {
+            updateClock();
+            setInterval(updateClock, 1000);
+            updateHearts();
+        };
+    </script>
+    
 </head>
 
 
+
 <body>
-    <div class="box box1">muốn học Html&CSS </div>
+    <div class="clock" id="clock"></div>
+    <button class="heart-button" onclick="addHeart()">❤️ Thả Tim</button>
+    <div class="heart-counter" id="heart-counter"></div>
+    <button class="reset-button" onclick="resetHearts()">🔄 Reset Tim</button>
+    <style>
+    
+
+    </style>
+    
     <div class="marquee-container">
         <div class="marquee">
-          -----:Học:THPT Phạm Văn Sáng with love❤️❤️❤️:-----                   ----Email liên hệ:hoangkhiem7891@gmail.com----                   ------Profile Khiêm doanh nhân---
+          -----THPT Phạm Văn Sáng with love❤️❤️❤️:-----                   ----Email liên hệ:hoangkhiem7891@gmail.com----                   ------vào đây rồi thì.---
         </div>
       </div>
 
@@ -91,7 +210,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="20k.js"></script>
     <script src="cc.js"></script>
-    <script src="gg.html"></script>
 </body>
 
 </html>
